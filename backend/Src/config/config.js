@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 //to get packages and assign into variables.
 
-const URI = "mongodb+srv://Seran:nAvindu%4099@cluster0.di265hu.mongodb.net/test";
+const URI = "mongodb+srv://navx99:uBGk5PplEdjkxCkl@nilwala.djsja5y.mongodb.net/";
 
 const connectDB = async () => {
     await mongoose.connect(URI);
