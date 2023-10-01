@@ -17,7 +17,6 @@ const Registration = () => {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLAstName] = useState('');
-  const [dob, setDob] = useState();
   const [email, setEmail] = useState();
   const [occupation, setOccupation] = useState();
   const [gender, setGender] = useState();
@@ -47,11 +46,11 @@ const Registration = () => {
     const user = {
       firstName:firstName,
       lastName:lastName,
-      dob:dob,
       email:email,
       occupation:occupation,
       gender:gender,
-      city:city
+      city:city,
+      password: pwd
     }
     
     axios.post('http://localhost:5000/user/add', user)
@@ -110,23 +109,6 @@ const Registration = () => {
                 setLAstName(e.target.value)
               }}
             />
-          </CardContent>
-
-          <CardContent>
-            <LocalizationProvider
-              dateAdapter={AdapterDayjs}
-              style={{ width: 600 }}
-            >
-              <DatePicker
-                label="Date of Birthday"
-                value={dob}
-                onChange={(e) => {
-                  setDob(e.target.value);
-                }}
-                style={{ width: 600 }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
           </CardContent>
 
           <CardContent>
@@ -196,7 +178,7 @@ const Registration = () => {
               sx={{ width: 600 }}
               value={pwd}
               onChange={(e) => {
-                setPwd(e)
+                setPwd(e.target.value)
               }}
             />
           </CardContent>
