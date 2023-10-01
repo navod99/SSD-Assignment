@@ -13,7 +13,7 @@ const addUser = async (req, res) => {
             const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
 
             // Create a new Login instance
-            const login = new Login({
+            const loginuser = new Login({
                 email: req.body.email,
                 password: hashedPassword,
                 role: req.body.occupation
@@ -23,7 +23,7 @@ const addUser = async (req, res) => {
             const user = new User(req.body);
 
             // Use Promise.all to save both models concurrently
-            const [userResult, loginResult] = await Promise.all([user.save(), login.save()]);
+            const [userResult, loginResult] = await Promise.all([user.save(), loginuser.save()]);
 
             // Send a response after both saves have completed
             res.status(200).send({ userData: userResult, loginData: loginResult });

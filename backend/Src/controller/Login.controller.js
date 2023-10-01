@@ -48,29 +48,27 @@ const deleteUser = async (req, res) => {
 }
 
 const findUserByEmail = async (req, res) => {
-    await User.findOne({email:req.params.id})
-        .then((data) => {
-            if (data) {
-                const match =  bcrypt.compare(req.password, data.password);
-                
-                if (match) {
-                    
-                    const token = jwt.sign(data.email, "secret")
-                    res.header('auth-token', token).send({
-                        "email": data.email,
-                        "role": data.role
-                    }) 
-                }
-                else {
-                    res.send('Invalid')
-                }
-                
+    try {
+        const user = await User.findOne({ email: req.params.id });
+
+        if (user) {
+            const isMatch = await bcrypt.compare(req.body.password, user.password);
+
+            if (isMatch) {
+                const token = jwt.sign({ email: user.email, role: user.role }, "secret");
+                res.header('auth-token', token).send({
+                    "email": user.email,
+                    "role": user.role
+                });
             } else {
-                res.send('Invalid')
+                res.status(401).send('Invalid');
             }
-        })
-        .catch((err) => { res.status(400).send(err) })
-    
+        } else {
+            res.status(404).send('User not found');
+        }
+    } catch (err) {
+        res.status(500).send(err);
+    }
 }
 module.exports = {
     addUser,
