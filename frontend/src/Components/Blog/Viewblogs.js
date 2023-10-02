@@ -13,7 +13,7 @@ function Viewblogs() {
     useEffect(()=>{
 
         function getBlogs(){
-            axios.get("http://localhost:5000/blogs").then((res) =>{
+            axios.get("https://localhost:5000/blogs").then((res) =>{
                 setListoblogs(res.data);
             }).catch((err)=>{
                 alert(err.message);

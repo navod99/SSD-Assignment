@@ -38,7 +38,7 @@ const EventReports = () => {
     useEffect(() => {
         if (!status && !year && !month) {
             function getEvents() {
-                axios.get(`http://localhost:5000/eventScheduling/viewevents`).then((res) => {
+                axios.get(`https://localhost:5000/eventScheduling/viewevents`).then((res) => {
                     dispatch(setData(res.data))
 
                 }).catch((err) => {
@@ -75,7 +75,7 @@ const EventReports = () => {
             else if (month) {
                 query = `?month=${month}`
             }
-            axios.get(`http://localhost:5000/eventScheduling/filter${query}`)
+            axios.get(`https://localhost:5000/eventScheduling/filter${query}`)
                 .then((res) => {
                     console.log(res.data, "res.data")
                     let arr = res.data;
@@ -91,7 +91,7 @@ const EventReports = () => {
                 });
         }
         else if (status == "Cancel") {
-            axios.get(`http://localhost:5000/eventScheduling/vieweCancelledEvents`)
+            axios.get(`https://localhost:5000/eventScheduling/vieweCancelledEvents`)
             .then((res) => {
                 console.log(res.data)
                 dispatch(setData(res.data))

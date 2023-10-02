@@ -169,7 +169,7 @@ const AddEvents = ({ toggle, setToggle }) => {
                         formData.append('fileName', values.photo && values.photo.name)
                         formData.append('description', values.description)
 
-                        axios.post("http://localhost:5000/eventScheduling/create", formData).then((res) => {
+                        axios.post("https://localhost:5000/eventScheduling/create", formData).then((res) => {
                             setToggle(!toggle)
                             handleClick()
                             setOpen(false);

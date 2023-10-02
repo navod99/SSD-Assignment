@@ -43,7 +43,7 @@ const MemberRemove = ({ id, toggle, setToggle }) => {
     const [DialogOpen, DialogSetOpen] = useState(false);
     const handleDelete = () => {
         console.log("id", id)
-        axios.delete(`http://localhost:5000/boardMembers/delete/${id}`).then((res) => {
+        axios.delete(`https://localhost:5000/boardMembers/delete/${id}`).then((res) => {
             setToggle(!toggle)
             handleClose1() 
             setMsg("Deleted Sucessfully");

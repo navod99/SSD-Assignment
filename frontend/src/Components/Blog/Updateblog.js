@@ -12,7 +12,7 @@ function Updateblog() {
     const newBlog = prompt("Enter New Content:");
 
     
-    axios.put("http://localhost:5000/blogs/update", {newBlog: newBlog, id: id}).then(()=>{
+    axios.put("https://localhost:5000/blogs/update", {newBlog: newBlog, id: id}).then(()=>{
         Swal.fire(
             'Successful!',
             'Blog Updated',
@@ -26,7 +26,7 @@ function Updateblog() {
    };
 
    const DeletelistofBlogs = (id) => {
-    axios.delete(`http://localhost:5000/blogs/delete/${id}`).then(()=>{
+    axios.delete(`https://localhost:5000/blogs/delete/${id}`).then(()=>{
         Swal.fire(
             'Successful!',
             'Blog Deleted',
@@ -42,7 +42,7 @@ function Updateblog() {
    useEffect(()=>{
 
     function getBlogs(){
-        axios.get("http://localhost:5000/blogs").then((res) =>{
+        axios.get("https://localhost:5000/blogs").then((res) =>{
             setListofblogs(res.data);
         }).catch((err)=>{
             alert(err.message);

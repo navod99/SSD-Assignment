@@ -13,7 +13,7 @@ const ViewUpcomingEvent = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/eventScheduling/viewevent/${params.id}`)
+        axios.get(`https://localhost:5000/eventScheduling/viewevent/${params.id}`)
             .then((res) => {
                 setEvent(res.data)
             })

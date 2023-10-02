@@ -13,7 +13,7 @@ function Fullviewblog() {
     useEffect(()=>{
 
         function getBlogs(){
-            axios.get(`http://localhost:5000/blogs/get/${params.id}`).then((res) =>{
+            axios.get(`https://localhost:5000/blogs/get/${params.id}`).then((res) =>{
             console.log(res.data, "Data"); 
             setblog(res.data);
             }).catch((err)=>{

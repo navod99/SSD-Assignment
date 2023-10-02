@@ -22,7 +22,7 @@ const EventScheduling = () => {
     useEffect(() => {
         if (!searchTerm && !status && !year) {
             function getEvents() {
-                axios.get(`http://localhost:5000/eventScheduling/viewevents`).then((res) => {
+                axios.get(`https://localhost:5000/eventScheduling/viewevents`).then((res) => {
                     console.log(res.data)
                     setEvents(res.data)
 
@@ -38,7 +38,7 @@ const EventScheduling = () => {
 
     const findEvents = (eventName) => {
         if (eventName) {
-            axios.get(`http://localhost:5000/eventScheduling/search/${eventName}`)
+            axios.get(`https://localhost:5000/eventScheduling/search/${eventName}`)
 
                 .then((res) => {
                     let arr = res.data;
@@ -67,7 +67,7 @@ const EventScheduling = () => {
         else if (year) {
             query = `?year=${year}`
         }
-        axios.get(`http://localhost:5000/eventScheduling/filter${query}`)
+        axios.get(`https://localhost:5000/eventScheduling/filter${query}`)
         .then((res) => {
             console.log(res.data, "res.data")
             let arr = res.data;

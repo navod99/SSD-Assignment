@@ -241,13 +241,13 @@ const EventCard = ({ event, toggle, setToggle }) => {
                                 'time': values.time.$d ? values.time.$d : values.time,
                                 'description': values.description
                             }
-                            axios.post("http://localhost:5000/eventScheduling/cancelledEvents", data).then((res) => {
+                            axios.post("https://localhost:5000/eventScheduling/cancelledEvents", data).then((res) => {
                                 console.log('res', res.data)
                             }).catch((err) => {
                                 console.log(err, "errr")
                             })
 
-                            axios.delete(`http://localhost:5000/eventScheduling/delete/${event._id}`).then((res) => {
+                            axios.delete(`https://localhost:5000/eventScheduling/delete/${event._id}`).then((res) => {
                                 setToggle(!toggle)
                                 handleClick2()
                                 setOpen(false);
@@ -256,7 +256,7 @@ const EventCard = ({ event, toggle, setToggle }) => {
                             })
                         }
                         else{
-                        axios.put(`http://localhost:5000/eventScheduling/update/${event._id}`, formData).then((res) => {
+                        axios.put(`https://localhost:5000/eventScheduling/update/${event._id}`, formData).then((res) => {
                             setToggle(!toggle)
                             handleClick()
                             setOpen(false);

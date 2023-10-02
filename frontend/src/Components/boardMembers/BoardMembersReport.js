@@ -20,7 +20,7 @@ const BoardMembersReport = () => {
     useEffect(() => {
         if (!year && !designation) {
             function getBoardMembers() {
-                axios.get("http://localhost:5000/boardMembers/viewMembers").then((res) => {
+                axios.get("https://localhost:5000/boardMembers/viewMembers").then((res) => {
                     dispatch(setData(res.data))
                 }).catch((err) => {
                     alert(err.message);
@@ -42,7 +42,7 @@ const BoardMembersReport = () => {
         else if (designation) {
             query = `?designation=${designation}`
         }
-        axios.get(`http://localhost:5000/boardMembers/filter${query}`)
+        axios.get(`https://localhost:5000/boardMembers/filter${query}`)
             .then((res) => {
                 console.log(res.data, "res.data")
                 let arr = res.data;
