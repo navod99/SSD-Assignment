@@ -153,7 +153,12 @@ const AddBoardMembers = ({toggle, setToggle}) => {
                                     }
                                     return value && SUPPORTED_FORMATS.includes(value?.type)
                                 }
-                            ),
+                            )
+                            .test(
+                                'fileSize',
+                                'File size must be less than 10MB',
+                                (value) => value && value.size <= 10000000
+                            )
 
                     })}
                     onSubmit={(values, { setSubmitting }) => {
