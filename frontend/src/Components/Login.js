@@ -26,8 +26,12 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const body = {
+            email: email,
+            password: password
+        }
 
-        axios.post(`http://localhost:5000/login/${email}`, { password:password })
+        axios.post(`http://localhost:5000/login`, body)
       .then((data) => {
         console.log(data);
         if (data.data == 'Invalid') {
