@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require('cors');
+const https = require ('https')
+const fs = require('fs')
 const EventSchedulingAPI = require("./Src/api/eventScheduling")
 const BoardMembersAPI = require("./Src/api/boardMembers-api")
 
@@ -14,15 +16,28 @@ const ProjectApi = require('./Src/api/projectApi');
 
 const PORT = process.env.PORT || 5000;
 
+const options = {
+  key: fs.readFileSync("./cert/key.pem"),
+  cert: fs.readFileSync("./cert/cert.pem"),
+};
+
+
+// Add the middleware to set X-Frame-Options header
+// app.use((req, res, next) => {
+//   res.header('X-Frame-Options', 'SAMEORIGIN');
+//   next();
+// });
+
 app.use(cors());
- app.use(bodyParser.json());
+app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended:true}));
 //  app.use(express.json());
 
-
-
 connectDB();
 
+// app.use('/', (req, res, next) => {
+//   res.send('Hello from SSL server')
+// })
 app.use("/blogs", blogsRouter);
 app.use("/Project", ProjectApi());
 
@@ -31,6 +46,8 @@ app.use("/boardMembers", BoardMembersAPI)
 app.use("/user", userApi())
 app.use('/login',loginApi())
 
-app.listen(PORT, () => {
-  console.log(`App listening at http://localhost:${PORT}`);
+const sslServer = https.createServer(options, app)
+
+sslServer.listen(PORT, () => {
+  console.log(`Server is running on https://localhost:${PORT}`);
 });

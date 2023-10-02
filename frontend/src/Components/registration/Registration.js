@@ -53,7 +53,7 @@ const Registration = () => {
       password: pwd
     }
     
-    axios.post('http://localhost:5000/user/add', user)
+    axios.post('https://localhost:5000/user/add', user)
       .then(() => {
       setMsg("Successfully Added user");
         SetSeverity("success");

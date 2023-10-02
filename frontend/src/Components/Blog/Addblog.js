@@ -21,7 +21,7 @@ function Addblog() {
             content
         }
     
-        axios.post("http://localhost:5000/blogs/add", newBlog).then(()=>{
+        axios.post("https://localhost:5000/blogs/add", newBlog).then(()=>{
             Swal.fire(
                 'Blog Published!',
                 'Thank You!',

@@ -65,7 +65,7 @@ const ProjectDes = () => {
 
   const deleteProject = async () => {
     axios
-      .delete(`http://localhost:5000/project/delete/${id}`)
+      .delete(`https://localhost:5000/project/delete/${id}`)
       .then(() => {
        
           setMsg("Massage Deleted Sucessfully");
@@ -99,7 +99,7 @@ const ProjectDes = () => {
       Description: description,
     };
     axios
-      .put(`http://localhost:5000/project/update/${id}`, project)
+      .put(`https://localhost:5000/project/update/${id}`, project)
       .then(() => {
         setMsg("Successfully Edited Projects");
         SetSeverity("success");
@@ -118,7 +118,7 @@ const ProjectDes = () => {
 
    useEffect(() => {
       axios
-      .get(`http://localhost:5000/project/${id}`)
+      .get(`https://localhost:5000/project/${id}`)
       .then((res) => {
         setProject(res.data);
         setProjectName(res.data.name)

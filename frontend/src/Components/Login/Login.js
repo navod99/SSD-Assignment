@@ -13,7 +13,7 @@ const Login = () => {
 
   const login = () => {
     
-    axios.post(`http://localhost:5000/login/${email}`, { password:pwd })
+    axios.post(`https://localhost:5000/login/${email}`, { password:pwd })
       .then((data) => {
         console.log(data);
         if (data.data == 'Invalid') {
