@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require('cors');
 const https = require ('https')
 const fs = require('fs')
+const dotenv =  require ('dotenv')
 const EventSchedulingAPI = require("./Src/api/eventScheduling")
 const BoardMembersAPI = require("./Src/api/boardMembers-api")
 
@@ -22,6 +23,7 @@ const options = {
 };
 
 
+
 app.use(function (req, res, next) {
   res.setHeader(
     'Content-Security-Policy',
@@ -31,6 +33,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(cors());
+
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended:true}));
 //  app.use(express.json());
