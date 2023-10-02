@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
+require('dotenv').config()
 //to get packages and assign into variables.
 
-const URI = "mongodb+srv://navx99:uBGk5PplEdjkxCkl@nilwala.djsja5y.mongodb.net/";
 
 const connectDB = async () => {
-    await mongoose.connect(URI);
+    await mongoose.connect(process.env.MONGO_URI);
     console.log("Database Connected");
-    
+
 }
 
 
