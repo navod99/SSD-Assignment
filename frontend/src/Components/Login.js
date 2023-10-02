@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Logo from './275370071_766907458022966_8343268332153914462_n.jpg'
+import { GoogleLogin } from '@react-oauth/google'
 
 
 const Login = () => {
@@ -56,7 +57,7 @@ const Login = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Grid container component="main" sx={{ height: '100vh'  }}>
+            <Grid container component="main" sx={{ height: '100vh' }}>
                 <CssBaseline />
                 <Grid
                     item
@@ -67,7 +68,7 @@ const Login = () => {
                         backgroundImage: `url(${Logo})`,
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: '#0e0569',
-                        marginTop:'-140px'
+                        marginTop: '-140px'
                     }}
                 />
                 <Grid item xs={12} sm={8} md={3} component={Paper} elevation={6} square>
@@ -86,6 +87,7 @@ const Login = () => {
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
+
 
                         <form onSubmit={handleSubmit} >
                             <TextField
@@ -124,6 +126,15 @@ const Login = () => {
                             >
                                 Sign In
                             </Button>
+                            <GoogleLogin
+                                onSuccess={credentialResponse => {
+                                    console.log(credentialResponse);
+                                    navigate('/adminDashboard')
+                                }}
+                                onError={() => {
+                                    console.log('Login Failed');
+                                }}
+                            />
                         </form>
                         <Grid container>
                             <Grid item xs>
