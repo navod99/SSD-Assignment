@@ -62,7 +62,7 @@ console.log(photo)
     formData.append('Description', description)
     formData.append('fileName', photo.name)
     axios
-      .post("http://localhost:5000/project/add", formData)
+      .post("https://localhost:5000/project/add", formData)
       .then(() => {
         setMsg("Successfully Added Projects");
         SetSeverity("success");
@@ -86,7 +86,7 @@ console.log(photo)
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/project")
+      .get("https://localhost:5000/project")
       .then((res) => {
         setProjects(res.data);
       })

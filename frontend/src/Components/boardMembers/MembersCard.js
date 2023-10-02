@@ -187,7 +187,7 @@ const MembersCard = ({ member, setToggle, toggle }) => {
                         formData.append('year', values.year)
                         formData.append('description', values.description)
 
-                        axios.put(`http://localhost:5000/boardMembers/update/${member._id}`, formData).then((res) => {
+                        axios.put(`https://localhost:5000/boardMembers/update/${member._id}`, formData).then((res) => {
                             handleClick()
                             setToggle(!toggle)
                             handleClose()

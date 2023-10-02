@@ -42,7 +42,7 @@ const UpcommingEvents = () => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/eventScheduling/filter?eventStatus=Publish`)
+        axios.get(`https://localhost:5000/eventScheduling/filter?eventStatus=Publish`)
             .then((res) => {
                 console.log(res.data, "res.data")
                 let arr = res.data;

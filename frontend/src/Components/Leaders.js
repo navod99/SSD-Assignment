@@ -16,7 +16,7 @@ const Leaders = () => {
 
   useEffect(() => {
     function getBoardMembers() {
-      axios.get(`http://localhost:5000/boardMembers/filter?year=${year}`).then((res) => {
+      axios.get(`https://localhost:5000/boardMembers/filter?year=${year}`).then((res) => {
         console.log(res.data)
         setMembers(res.data)
       }).catch((err) => {

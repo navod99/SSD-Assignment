@@ -15,7 +15,7 @@ const HomeProjects = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/project")
+      .get("https://localhost:5000/project")
       .then((res) => {
         setProjects(res.data);
       })

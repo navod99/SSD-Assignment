@@ -153,7 +153,12 @@ const AddBoardMembers = ({toggle, setToggle}) => {
                                     }
                                     return value && SUPPORTED_FORMATS.includes(value?.type)
                                 }
-                            ),
+                            )
+                            .test(
+                                'fileSize',
+                                'File size must be less than 10MB',
+                                (value) => value && value.size <= 10000000
+                            )
 
                     })}
                     onSubmit={(values, { setSubmitting }) => {
@@ -166,7 +171,7 @@ const AddBoardMembers = ({toggle, setToggle}) => {
                         formData.append('fileName', values.photo && values.photo.name)
                         formData.append('description', values.description)
 
-                        axios.post("http://localhost:5000/boardMembers/create", formData).then((res) => {
+                        axios.post("https://localhost:5000/boardMembers/create", formData).then((res) => {
                             setToggle(!toggle)
                             handleClick()
                             setOpen(false)
