@@ -29,7 +29,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from "react-router";
 import BoardMembersReport from "./boardMembers/BoardMembersReport";
 import Updateblog from "./Blog/Updateblog";
-
+import { googleLogout } from '@react-oauth/google';
 function Copyright(props) {
 
     return (
@@ -122,6 +122,7 @@ function DashboardContent() {
         sessionStorage.removeItem('role')
         sessionStorage.removeItem('mail')
         navigate('/')
+        googleLogout();
     }
 
 

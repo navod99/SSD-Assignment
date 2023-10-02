@@ -2,7 +2,8 @@ import { React, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Card, CardContent, Typography } from "@mui/material";
-
+import { GoogleLogin } from '@react-oauth/google'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
@@ -10,34 +11,37 @@ const Login = () => {
 
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState();
+  const loginnavigate = () => {
+    navigate('/adminDashboard')
+  }
 
   const login = () => {
-    
-    axios.post(`http://localhost:5000/login/${email}`, { password:pwd })
+
+    axios.post(`http://localhost:5000/login/${email}`, { password: pwd })
       .then((data) => {
         console.log(data);
         if (data.data == 'Invalid') {
           alert('Wrong')
         } else {
           sessionStorage.setItem('role', data.data.role)
-          sessionStorage.setItem('mail',data.data.email)
+          sessionStorage.setItem('mail', data.data.email)
           if (data.data.role) {
             navigate('/adminDashboard');
           } else {
             navigate('/')
           }
-          
-          
+
+
         }
-        
-        
+
+
       }).catch((err) => {
         console.log(err)
-    })
+      })
   }
 
   return (
-      <div style={{ backgroundColor: "#0e0569", height: "100vh" }}>
+    <div style={{ backgroundColor: "#0e0569", height: "100vh" }}>
       <Box
         component="span"
         sx={{
@@ -71,11 +75,25 @@ const Login = () => {
             />
           </CardContent>
           <CardContent>
-            <Button variant="contained" color="success" sx={{ width: 300 }} onClick = {login} >
+            <Button variant="contained" color="success" sx={{ width: 300 }} onClick={login} >
               Login
             </Button>
           </CardContent>
+          <CardContent>
+            <GoogleLogin
+
+              onSuccess={credentialResponse => {
+                const token = credentialResponse?.tokenId
+                console.log(token)
+                loginnavigate();
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
+          </CardContent>
         </Card>
+
       </Box>
     </div>
   );
