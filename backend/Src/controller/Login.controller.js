@@ -49,7 +49,7 @@ const deleteUser = async (req, res) => {
 
 const findUserByEmail = async (req, res) => {
     try {
-        const user = await User.findOne({ email: req.params.id });
+        const user = await User.findOne({ email: req.body.email });
 
         if (user) {
             const isMatch = await bcrypt.compare(req.body.password, user.password);

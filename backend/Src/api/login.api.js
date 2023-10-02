@@ -7,6 +7,6 @@ module.exports = function () {
     router.get('/', userController.getAllUsers);
     router.put('/update/:id', userController.updateUser)
     router.delete('/delete/:id', userController.deleteUser)
-    router.post('/:id', userController.findUserByEmail)
+    router.post('/', userController.findUserByEmail)
     return router;
 }
