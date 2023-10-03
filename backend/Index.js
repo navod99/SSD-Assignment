@@ -6,6 +6,7 @@ const EventSchedulingAPI = require("./Src/api/eventScheduling")
 const BoardMembersAPI = require("./Src/api/boardMembers-api")
 
 const bodyParser = require("body-parser");
+const mongoSanitize = require('express-mongo-sanitize');
 const userApi = require("./Src/api/Registraion.api")
 const loginApi = require ('./Src/api/login.api')
 const connectDB = require("./src/config/config");
@@ -21,6 +22,7 @@ const options = {
   cert: fs.readFileSync("./cert/cert.pem"),
 };
 
+app.use(mongoSanitize());
 
 app.use(function (req, res, next) {
   res.setHeader(
@@ -29,6 +31,12 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+app.use(
+  mongoSanitize({
+    replaceWith: '_',
+  }),
+);
 
 app.use(cors());
 app.use(bodyParser.json());
