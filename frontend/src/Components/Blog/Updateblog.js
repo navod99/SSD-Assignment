@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React,  { useEffect, useState }  from 'react'
 import Swal from 'sweetalert2'
+import { headers } from '../APiHeader';
 
 function Updateblog() {
 
@@ -12,7 +13,7 @@ function Updateblog() {
     const newBlog = prompt("Enter New Content:");
 
     
-    axios.put("https://localhost:5000/blogs/update", {newBlog: newBlog, id: id}).then(()=>{
+    axios.put("https://localhost:5000/blogs/update", {newBlog: newBlog, id: id}, {headers: headers}).then(()=>{
         Swal.fire(
             'Successful!',
             'Blog Updated',
@@ -26,7 +27,7 @@ function Updateblog() {
    };
 
    const DeletelistofBlogs = (id) => {
-    axios.delete(`https://localhost:5000/blogs/delete/${id}`).then(()=>{
+    axios.delete(`https://localhost:5000/blogs/delete/${id}`, {headers: headers}).then(()=>{
         Swal.fire(
             'Successful!',
             'Blog Deleted',
@@ -42,7 +43,7 @@ function Updateblog() {
    useEffect(()=>{
 
     function getBlogs(){
-        axios.get("https://localhost:5000/blogs").then((res) =>{
+        axios.get("https://localhost:5000/blogs", {headers: headers}).then((res) =>{
             setListofblogs(res.data);
         }).catch((err)=>{
             alert(err.message);

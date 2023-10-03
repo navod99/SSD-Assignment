@@ -13,6 +13,7 @@ import { useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Link } from 'react-router-dom';
+import { headers } from './APiHeader';
 
 const UpcommingEvents = () => {
 
@@ -42,7 +43,7 @@ const UpcommingEvents = () => {
     }
 
     useEffect(() => {
-        axios.get(`https://localhost:5000/eventScheduling/filter?eventStatus=Publish`)
+        axios.get(`https://localhost:5000/eventScheduling/filter?eventStatus=Publish`, {headers: headers})
             .then((res) => {
                 console.log(res.data, "res.data")
                 let arr = res.data;

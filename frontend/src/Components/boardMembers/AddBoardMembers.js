@@ -28,6 +28,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { headers } from '../APiHeader';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -171,7 +172,7 @@ const AddBoardMembers = ({toggle, setToggle}) => {
                         formData.append('fileName', values.photo && values.photo.name)
                         formData.append('description', values.description)
 
-                        axios.post("https://localhost:5000/boardMembers/create", formData).then((res) => {
+                        axios.post("https://localhost:5000/boardMembers/create", formData, {headers: headers}).then((res) => {
                             setToggle(!toggle)
                             handleClick()
                             setOpen(false)

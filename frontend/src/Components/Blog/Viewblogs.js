@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import React,{useState, useEffect} from 'react'
 import "../Bstyles/listofblogs.css"
 import {Button} from '@mui/material'
-import TextField from "@mui/material/TextField";;
+import TextField from "@mui/material/TextField";
+import { headers } from '../APiHeader';
+
 function Viewblogs() {
 
     const [SValue,setSValue] = useState('');
@@ -13,7 +15,7 @@ function Viewblogs() {
     useEffect(()=>{
 
         function getBlogs(){
-            axios.get("https://localhost:5000/blogs").then((res) =>{
+            axios.get("https://localhost:5000/blogs", {headers: headers}).then((res) =>{
                 setListoblogs(res.data);
             }).catch((err)=>{
                 alert(err.message);

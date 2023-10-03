@@ -12,6 +12,7 @@ import GenerateReports from './GenerateReports';
 import AddEvents from './AddEvents';
 import Grid from '@mui/material/Grid';
 import FilterMonth from './FilterMonth';
+import { headers } from '../APiHeader';
 
 const EventReports = () => {
 
@@ -38,7 +39,7 @@ const EventReports = () => {
     useEffect(() => {
         if (!status && !year && !month) {
             function getEvents() {
-                axios.get(`https://localhost:5000/eventScheduling/viewevents`).then((res) => {
+                axios.get(`https://localhost:5000/eventScheduling/viewevents`, {headers: headers}).then((res) => {
                     dispatch(setData(res.data))
 
                 }).catch((err) => {
@@ -75,7 +76,7 @@ const EventReports = () => {
             else if (month) {
                 query = `?month=${month}`
             }
-            axios.get(`https://localhost:5000/eventScheduling/filter${query}`)
+            axios.get(`https://localhost:5000/eventScheduling/filter${query}`, {headers: headers})
                 .then((res) => {
                     console.log(res.data, "res.data")
                     let arr = res.data;
@@ -91,7 +92,7 @@ const EventReports = () => {
                 });
         }
         else if (status == "Cancel") {
-            axios.get(`https://localhost:5000/eventScheduling/vieweCancelledEvents`)
+            axios.get(`https://localhost:5000/eventScheduling/vieweCancelledEvents`, {headers: headers})
             .then((res) => {
                 console.log(res.data)
                 dispatch(setData(res.data))

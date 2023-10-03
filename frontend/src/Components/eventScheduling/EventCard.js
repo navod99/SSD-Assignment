@@ -34,6 +34,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import { headers } from '../APiHeader';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -241,13 +242,13 @@ const EventCard = ({ event, toggle, setToggle }) => {
                                 'time': values.time.$d ? values.time.$d : values.time,
                                 'description': values.description
                             }
-                            axios.post("https://localhost:5000/eventScheduling/cancelledEvents", data).then((res) => {
+                            axios.post("https://localhost:5000/eventScheduling/cancelledEvents", data, {headers: headers}).then((res) => {
                                 console.log('res', res.data)
                             }).catch((err) => {
                                 console.log(err, "errr")
                             })
 
-                            axios.delete(`https://localhost:5000/eventScheduling/delete/${event._id}`).then((res) => {
+                            axios.delete(`https://localhost:5000/eventScheduling/delete/${event._id}`, {headers: headers}).then((res) => {
                                 setToggle(!toggle)
                                 handleClick2()
                                 setOpen(false);
@@ -256,7 +257,7 @@ const EventCard = ({ event, toggle, setToggle }) => {
                             })
                         }
                         else{
-                        axios.put(`https://localhost:5000/eventScheduling/update/${event._id}`, formData).then((res) => {
+                        axios.put(`https://localhost:5000/eventScheduling/update/${event._id}`, formData, {headers: headers}).then((res) => {
                             setToggle(!toggle)
                             handleClick()
                             setOpen(false);

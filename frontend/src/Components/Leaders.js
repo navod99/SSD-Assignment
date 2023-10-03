@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import { Box } from '@mui/material';
+import { headers } from './APiHeader';
 
 const Leaders = () => {
 
@@ -16,7 +17,7 @@ const Leaders = () => {
 
   useEffect(() => {
     function getBoardMembers() {
-      axios.get(`https://localhost:5000/boardMembers/filter?year=${year}`).then((res) => {
+      axios.get(`https://localhost:5000/boardMembers/filter?year=${year}`, {headers: headers}).then((res) => {
         console.log(res.data)
         setMembers(res.data)
       }).catch((err) => {
