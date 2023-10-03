@@ -8,6 +8,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import MemberYearFilter from './MemberYearFilter';
 import Designation from './Designation';
+import { headers } from '../APiHeader';
 
 const BoardMembersReport = () => {
     const [rows, setRows] = useState()
@@ -20,7 +21,7 @@ const BoardMembersReport = () => {
     useEffect(() => {
         if (!year && !designation) {
             function getBoardMembers() {
-                axios.get("https://localhost:5000/boardMembers/viewMembers").then((res) => {
+                axios.get("https://localhost:5000/boardMembers/viewMembers", {headers: headers}).then((res) => {
                     dispatch(setData(res.data))
                 }).catch((err) => {
                     alert(err.message);
@@ -42,7 +43,7 @@ const BoardMembersReport = () => {
         else if (designation) {
             query = `?designation=${designation}`
         }
-        axios.get(`https://localhost:5000/boardMembers/filter${query}`)
+        axios.get(`https://localhost:5000/boardMembers/filter${query}`, {headers: headers})
             .then((res) => {
                 console.log(res.data, "res.data")
                 let arr = res.data;

@@ -4,10 +4,11 @@ const cloudinary = require("../utils/cloudinary");
 const upload = require("../utils/multer");
 const ProjectController = require('../controller/projectController');
 const Project = require('../modal/projects');
+const { validateToken } = require("../utils/validateToken");
 
 module.exports = function () {
     // router.post('/add', ProjectController.addProjects);
-  router.post("/add", upload.single("file"), async (req, res) => {
+  router.post("/add", validateToken, upload.single("file"), async (req, res) => {
   let fileName = req.body.fileName
   let folder = "Projects"
   try {
@@ -35,8 +36,8 @@ module.exports = function () {
   }
 });
     router.get('/', ProjectController.readProjects);
-    router.put('/update/:id', ProjectController.updateProjects)
-    router.delete('/delete/:id', ProjectController.deleteProjects)
+    router.put('/update/:id', validateToken , ProjectController.updateProjects)
+    router.delete('/delete/:id', validateToken, ProjectController.deleteProjects)
     router.get('/:id', ProjectController.findProjectByID)
     router.post('/search',ProjectController.search)
     return router;

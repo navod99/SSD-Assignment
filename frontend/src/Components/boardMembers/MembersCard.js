@@ -30,6 +30,8 @@ import MuiAlert from '@mui/material/Alert';
 // import MenuItem from '@mui/material/MenuItem';
 import UploadPhoto from './MemberPhotoUpload';
 // import UploadPhoto from '../eventScheduling/UploadPhoto';
+import { headers } from '../APiHeader';
+
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -187,7 +189,7 @@ const MembersCard = ({ member, setToggle, toggle }) => {
                         formData.append('year', values.year)
                         formData.append('description', values.description)
 
-                        axios.put(`https://localhost:5000/boardMembers/update/${member._id}`, formData).then((res) => {
+                        axios.put(`https://localhost:5000/boardMembers/update/${member._id}`, formData, {headers: headers}).then((res) => {
                             handleClick()
                             setToggle(!toggle)
                             handleClose()

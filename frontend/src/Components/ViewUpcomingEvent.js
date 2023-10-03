@@ -6,6 +6,7 @@ import { Box } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router'
+import { headers } from './APiHeader'
 
 const ViewUpcomingEvent = () => {
     const params = useParams()
@@ -13,7 +14,7 @@ const ViewUpcomingEvent = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`https://localhost:5000/eventScheduling/viewevent/${params.id}`)
+        axios.get(`https://localhost:5000/eventScheduling/viewevent/${params.id}`, {headers: headers})
             .then((res) => {
                 setEvent(res.data)
             })

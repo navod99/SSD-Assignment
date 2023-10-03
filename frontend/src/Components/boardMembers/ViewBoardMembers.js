@@ -11,6 +11,7 @@ import MemberList from './MemberList';
 import MemberSearchBar from './MemberSearchBar';
 import { useSelector } from 'react-redux';
 import MemberYearFilter from './MemberYearFilter';
+import { headers } from '../APiHeader';
 
 const ViewBoardMembers = () => {
 
@@ -24,7 +25,7 @@ const ViewBoardMembers = () => {
     useEffect(() => {
         if (!searchTerm && !year && !designation) {
             function getBoardMembers() {
-                axios.get("https://localhost:5000/boardMembers/viewMembers").then((res) => {
+                axios.get("https://localhost:5000/boardMembers/viewMembers", {headers: headers}).then((res) => {
                     console.log(res.data)
                     setMembers(res.data)
                 }).catch((err) => {
@@ -38,7 +39,7 @@ const ViewBoardMembers = () => {
 
     const findMembers = (boardMemberName) => {
         if (boardMemberName) {
-            axios.get(`https://localhost:5000/boardMembers/search/${boardMemberName}`)
+            axios.get(`https://localhost:5000/boardMembers/search/${boardMemberName}`, {headers: headers})
 
                 .then((res) => {
                     let arr = res.data;
@@ -67,7 +68,7 @@ const ViewBoardMembers = () => {
         else if (designation) {
             query = `?designation=${designation}`
         }
-        axios.get(`https://localhost:5000/boardMembers/filter${query}`)
+        axios.get(`https://localhost:5000/boardMembers/filter${query}`, {headers: headers})
             .then((res) => {
                 console.log(res.data, "res.data")
                 let arr = res.data;

@@ -13,6 +13,8 @@ import FormLabel from "@mui/material/FormLabel";
 import axios from "axios";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar"
+import { headers } from '../APiHeader';
+
 const Registration = () => {
 
   const [firstName, setFirstName] = useState('');
@@ -53,7 +55,7 @@ const Registration = () => {
       password: pwd
     }
     
-    axios.post('https://localhost:5000/user/add', user)
+    axios.post('https://localhost:5000/user/add', user, {headers: headers})
       .then(() => {
       setMsg("Successfully Added user");
         SetSeverity("success");

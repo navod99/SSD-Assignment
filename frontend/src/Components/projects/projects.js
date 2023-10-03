@@ -19,6 +19,7 @@ import { FormLabel } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { setView } from '../../store/reducers/containerReducer';
 import { setId } from "../../store/reducers/projectReducer";
+import { headers } from '../APiHeader';
 
 const Projects = () => {
    const dispatch = useDispatch()
@@ -62,7 +63,7 @@ console.log(photo)
     formData.append('Description', description)
     formData.append('fileName', photo.name)
     axios
-      .post("https://localhost:5000/project/add", formData)
+      .post("https://localhost:5000/project/add", formData, {headers: headers})
       .then(() => {
         setMsg("Successfully Added Projects");
         SetSeverity("success");

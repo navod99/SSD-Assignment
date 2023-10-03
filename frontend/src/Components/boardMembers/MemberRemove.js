@@ -12,6 +12,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Menu from '@mui/material/Menu';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { headers } from '../APiHeader';
 
 const MemberRemove = ({ id, toggle, setToggle }) => {
 
@@ -43,7 +44,7 @@ const MemberRemove = ({ id, toggle, setToggle }) => {
     const [DialogOpen, DialogSetOpen] = useState(false);
     const handleDelete = () => {
         console.log("id", id)
-        axios.delete(`https://localhost:5000/boardMembers/delete/${id}`).then((res) => {
+        axios.delete(`https://localhost:5000/boardMembers/delete/${id}`, {headers: headers}).then((res) => {
             setToggle(!toggle)
             handleClose1() 
             setMsg("Deleted Sucessfully");

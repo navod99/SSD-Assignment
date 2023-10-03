@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import {Card, TextField, Grid, Typography, Button, CardContent} from '@mui/material'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-
+import { headers } from '../APiHeader'
 
 function Addblog() {
 
@@ -21,7 +21,7 @@ function Addblog() {
             content
         }
     
-        axios.post("https://localhost:5000/blogs/add", newBlog).then(()=>{
+        axios.post("https://localhost:5000/blogs/add", newBlog, {headers: headers}).then(()=>{
             Swal.fire(
                 'Blog Published!',
                 'Thank You!',

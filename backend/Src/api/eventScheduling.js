@@ -4,8 +4,14 @@ const cloudinary = require("../utils/cloudinary");
 const upload = require("../utils/multer");
 const EventSchedulingScheme = require("../modal/eventScheduling")
 const cancelledEventsSchema = require("../modal/CancelledEvents")
+const { validateToken } = require("../utils/validateToken");
 
-router.post("/create", upload.single("file"), async (req, res) => {
+
+router.post("/create",  validateToken, upload.single("file"), async (req, res) => {
+    // The "Authorization" header is present
+    const authToken = req.headers["authorization"];;
+    console.log("authToken", authToken)
+  
   let fileName = req.body.fileName
   let folder = "Events"
   try {
@@ -37,7 +43,7 @@ router.post("/create", upload.single("file"), async (req, res) => {
   }
 });
 
-router.post("/cancelledEvents", async (req, res) => {
+router.post("/cancelledEvents", validateToken, async (req, res) => {
   try {
 
     // Create Cancelled Event
@@ -101,7 +107,7 @@ router.get("/viewevent/:id", async (req, res) => {
 
 });
 
-router.put("/update/:id", upload.single("file"), async (req, res) => {
+router.put("/update/:id", validateToken, upload.single("file"), async (req, res) => {
   let fileName = req.body.fileName
   let folder = "Events"
 
@@ -135,7 +141,7 @@ router.put("/update/:id", upload.single("file"), async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", validateToken, async (req, res) => {
   if (req.params.id) {
     //delete proposal data
     await EventSchedulingScheme.findByIdAndDelete(req.params.id).then((data) => { res.status(200).send(data) })

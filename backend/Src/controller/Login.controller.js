@@ -1,6 +1,7 @@
 const User = require('../modal/login');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
+const { createSecretToken } = require("../utils/secretjsonToken");
 //Add project
 
 const addUser = async (req, res) => {
@@ -55,11 +56,16 @@ const findUserByEmail = async (req, res) => {
             const isMatch = await bcrypt.compare(req.body.password, user.password);
 
             if (isMatch) {
-                const token = jwt.sign({ email: user.email, role: user.role }, "secret");
-                res.header('auth-token', token).send({
-                    "email": user.email,
-                    "role": user.role
-                });
+                const token = createSecretToken(user._id);
+                res.json({
+                    email: user.email,
+                    role: user.role,
+                    token: token,
+                })
+                // res.header('auth-token', token).send({
+                //     "email": user.email,
+                //     "role": user.role
+                // });
             } else {
                 res.status(401).send('Invalid');
             }

@@ -6,6 +6,7 @@ import { GoogleLogin } from '@react-oauth/google'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import { headers } from "../APiHeader";
 const Login = () => {
   const navigate = useNavigate();
 
@@ -17,7 +18,7 @@ const Login = () => {
 
   const login = () => {
     
-    axios.post(`https://localhost:5000/login/${email}`, { password:pwd })
+    axios.post(`https://localhost:5000/login/${email}`, { password:pwd }, {headers: headers})
       .then((data) => {
         console.log(data);
         if (data.data == 'Invalid') {

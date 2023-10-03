@@ -32,14 +32,24 @@ const Login = () => {
             password: password
         }
 
+        // sessionStorage.setItem('role', "admin")
+        //       sessionStorage.setItem('mail',"navod@gmail.com")
+        //       if ("admin") {
+        //         navigate('/adminDashboard');
+        //       } else {
+        //         navigate('/')
+        //       }
+              
+
         axios.post(`https://localhost:5000/login`, body)
       .then((data) => {
-        console.log(data);
+        console.log("data", data);
         if (data.data == 'Invalid') {
           alert('Wrong')
         } else {
           sessionStorage.setItem('role', data.data.role)
           sessionStorage.setItem('mail',data.data.email)
+          sessionStorage.setItem('token', data.data.token)
           if (data.data.role) {
             navigate('/adminDashboard');
           } else {
@@ -51,7 +61,7 @@ const Login = () => {
         
         
       }).catch((err) => {
-        console.log(err)
+        console.log("error", err)
     })
   }
 

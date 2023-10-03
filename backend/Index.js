@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require('cors');
 const https = require ('https')
+const crypto = require('crypto');
 const fs = require('fs')
 const dotenv =  require ('dotenv')
 const EventSchedulingAPI = require("./Src/api/eventScheduling")
@@ -12,6 +13,8 @@ const userApi = require("./Src/api/Registraion.api")
 const loginApi = require ('./Src/api/login.api')
 const connectDB = require("./src/config/config");
 const blogsRouter = require("./Src/Route/blogs");
+const secretKey = crypto.randomBytes(32).toString('hex');
+console.log(secretKey);
 const app = express();
 
 const ProjectApi = require('./Src/api/projectApi');

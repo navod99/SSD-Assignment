@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios'
 //import { Card } from '@material-ui/core';
 import {Card} from '@mui/material';
-
+import { headers } from '../APiHeader';
 
 function Fullviewblog() {
 
@@ -13,7 +13,7 @@ function Fullviewblog() {
     useEffect(()=>{
 
         function getBlogs(){
-            axios.get(`https://localhost:5000/blogs/get/${params.id}`).then((res) =>{
+            axios.get(`https://localhost:5000/blogs/get/${params.id}`,{headers: headers}).then((res) =>{
             console.log(res.data, "Data"); 
             setblog(res.data);
             }).catch((err)=>{
