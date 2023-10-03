@@ -3,8 +3,9 @@ const router = express.Router();
 const cloudinary = require("../utils/cloudinary");
 const upload = require("../utils/multer");
 const BoardMembersScheme = require("../modal/boardMembers-modal")
+const { validateToken } = require("../utils/validateToken");
 
-router.post("/create", upload.single("file"), async (req, res) => {
+router.post("/create", validateToken, upload.single("file"), async (req, res) => {
   let fileName = req.body.fileName
   let folder = "Members"
   try {
@@ -51,7 +52,7 @@ router.get("/viewMembers", async (req, res) => {
 
 
 //Update
-router.put("/update/:id", upload.single("file"), async (req, res) => {
+router.put("/update/:id", validateToken, upload.single("file"), async (req, res) => {
   let fileName = req.body.fileName
   let folder = "BoardMembers"
 
@@ -84,7 +85,7 @@ router.put("/update/:id", upload.single("file"), async (req, res) => {
 
 
 //Delete Board Member
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", validateToken, async (req, res) => {
   if (req.params.id) {
     //delete proposal data
     await BoardMembersScheme.findByIdAndDelete(req.params.id).then((data) => { res.status(200).send(data) })

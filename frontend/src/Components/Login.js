@@ -17,7 +17,6 @@ import { useNavigate } from 'react-router-dom';
 import Logo from './275370071_766907458022966_8343268332153914462_n.jpg'
 import { GoogleLogin } from '@react-oauth/google'
 
-import { headers } from './APiHeader';
 
 const Login = () => {
     const theme = createTheme();
@@ -42,14 +41,15 @@ const Login = () => {
         //       }
               
 
-        axios.post(`https://localhost:5000/login`, body, {headers: headers})
+        axios.post(`https://localhost:5000/login`, body)
       .then((data) => {
-        console.log(data);
+        console.log("data", data);
         if (data.data == 'Invalid') {
           alert('Wrong')
         } else {
           sessionStorage.setItem('role', data.data.role)
           sessionStorage.setItem('mail',data.data.email)
+          sessionStorage.setItem('token', data.data.token)
           if (data.data.role) {
             navigate('/adminDashboard');
           } else {
